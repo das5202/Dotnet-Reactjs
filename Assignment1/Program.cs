@@ -10,7 +10,7 @@ var app = builder.Build();
 // Enable CORS
 app.UseCors(options =>
 {
-    options.AllowAnyOrigin(); // You can customize this to allow specific origins
+    options.AllowAnyOrigin(); 
     options.AllowAnyMethod();
     options.AllowAnyHeader();
 });
