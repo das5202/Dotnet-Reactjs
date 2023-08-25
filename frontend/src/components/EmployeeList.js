@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import SearchComponent from './SearchData';
 
-
-  function EmployeeList() {
-    const [token, setToken] = useState(null);
-    const [employees, setEmployees] = useState([]);
-    const [filteredData, setFilteredData] = useState([]);
+function EmployeeList() {
+  const [token, setToken] = useState(null);
+  const [employees, setEmployees] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
-    
     const authenticateUser = async () => {
       try {
         const authResponse = await axios.post('https://localhost:7277/api/Auth/auth', { "id":123, "password":"a"});
@@ -32,7 +29,7 @@ import SearchComponent from './SearchData';
   const fetchEmployees = async () => {
     try {
       const headers = {
-        'Authorization': `Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2OTI4OTM1ODAsIm5iZiI6MTY5Mjg5MzU4MCwiZXhwIjoxNjk1NDg1NTgwLCJpc3MiOiJJc3N1ZXIiLCJhdWQiOiJBdWRpZW5jZSJ9.NCsqWnSsxOfVT5gHxN59mRa3IpXZSfS8QcSp2dD0dH58lsMPEr8Fxpol1v8jh70SvwbzRmd9S70X3_S_bgBDLA` // Use the stored token here
+        'Authorization': `Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2OTI5NzU2ODYsIm5iZiI6MTY5Mjk3NTY4NiwiZXhwIjoxNjk1NTY3Njg2LCJpc3MiOiJJc3N1ZXIiLCJhdWQiOiJBdWRpZW5jZSJ9.D4yywoUgrHLZzUtsTsk4dEWoNOimQhVFtn5vusJrBE-izmt_y0jjd0ffne7PvZ1-ify9kWVuyOEMxmMa_EuOyw` // Use the stored token here
       };
       
       const employeesResponse = await axios.get('https://localhost:7277/api/Employee/all', { headers });
@@ -44,18 +41,31 @@ import SearchComponent from './SearchData';
     }
   };
 
-  console.log('Employees:', employees); 
+  const filteredEmployees = employees.filter(employee =>
+    employee.empName.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
-return (
-  <div>
+  return (
+    <div>
       <h1>Employee List</h1>
-      <SearchComponent employees={employees} setFilteredData={setFilteredData} />
-
-      
+      <div>
+        <input
+          type="text"
+          placeholder="Search by employee name"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+      </div>
+      <ul>
+        {filteredEmployees.map((employee, index) => (
+          <li key={index}>
+            {employee.empId}<br />
+            {employee.empName}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
-
-
 
 export default EmployeeList;

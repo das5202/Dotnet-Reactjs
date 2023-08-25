@@ -1,6 +1,6 @@
 import React from 'react';
 import EmployeeList from './components/EmployeeList';
-import SearchComponent from './components/SearchData';
+
 
 
 function App() {
