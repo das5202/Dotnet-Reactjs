@@ -1,8 +1,11 @@
-﻿namespace JwtAuth.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace JwtAuth.Models
 {
     public class Employee
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
+        [Key]
+        public int EmpId { get; set; }
+        public string EmpName { get; set; }
     }
 }

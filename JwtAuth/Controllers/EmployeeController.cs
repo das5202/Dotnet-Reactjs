@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+﻿using JwtAuth.Data;
 using JwtAuth.Models;
-using JwtAuth.Controllers;
 using Microsoft.AspNetCore.Authorization;
-
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
 
 namespace JwtAut.Controllers
 {
@@ -12,29 +13,27 @@ namespace JwtAut.Controllers
     [Authorize]
     public class EmployeeController : ControllerBase
     {
-        private static List<Employee> Employees = new List<Employee>()
-        {
-            new Employee { Id = 0, Name = "EmployeeA" },
-            new Employee { Id = 1, Name = "EmployeeB" },
-            new Employee { Id = 2, Name = "EmployeeC" }
-        };
+        private readonly AppDbContext _dbContext;
 
-        // GET: api/Employee/all
-
-        [HttpGet("all")]
-        
-        public IActionResult GetAllEmployees()
+        public EmployeeController(AppDbContext dbContext)
         {
-            return Ok(Employees);
+            _dbContext = dbContext;
         }
 
-        // GET: api/Employee/byId/1
+        [HttpGet("all")]
+        public IActionResult GetAllEmployees()
+        {
+            var employees = _dbContext.Employees.ToList();
+            return Ok(employees);
+        }
+
         [HttpGet("byId/{id}")]
         public IActionResult GetEmployeeById(int id)
         {
-            if (id >= 0 && id < Employees.Count)
+            var employee = _dbContext.Employees.FirstOrDefault(e => e.EmpId == id);
+            if (employee != null)
             {
-                return Ok(Employees[id]);
+                return Ok(employee);
             }
             else
             {
@@ -42,22 +41,35 @@ namespace JwtAut.Controllers
             }
         }
 
-        // POST: api/Employee/create
         [HttpPost("create")]
         public IActionResult CreateEmployee([FromBody] Employee newEmployee)
         {
-            Employees.Add(newEmployee);
+            // Temporarily disable identity insert
+            _dbContext.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Employees ON;");
+
+            // Insert the new employee with the provided EmpId
+            _dbContext.Employees.Add(newEmployee);
+            _dbContext.SaveChanges();
+
+            // Re-enable identity insert
+            _dbContext.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Employees OFF;");
+
             return Created("", newEmployee);
         }
 
-        // PUT: api/Employee/update/1
+
+
+
+
         [HttpPut("update/{id}")]
         public IActionResult UpdateEmployee(int id, [FromBody] Employee updatedEmployee)
         {
-            if (id >= 0 && id < Employees.Count)
+            var employee = _dbContext.Employees.FirstOrDefault(e => e.EmpId == id);
+            if (employee != null)
             {
-                Employees[id] = updatedEmployee;
-                return Ok(Employees);
+                employee.EmpName = updatedEmployee.EmpName;
+                _dbContext.SaveChanges();
+                return Ok(employee);
             }
             else
             {
@@ -65,14 +77,15 @@ namespace JwtAut.Controllers
             }
         }
 
-        // DELETE: api/Employee/delete/1
         [HttpDelete("delete/{id}")]
         public IActionResult DeleteEmployee(int id)
         {
-            if (id >= 0 && id < Employees.Count) 
+            var employee = _dbContext.Employees.FirstOrDefault(e => e.EmpId == id);
+            if (employee != null)
             {
-                Employees.RemoveAt(id);
-                return Ok(Employees);
+                _dbContext.Employees.Remove(employee);
+                _dbContext.SaveChanges();
+                return Ok(employee);
             }
             else
             {

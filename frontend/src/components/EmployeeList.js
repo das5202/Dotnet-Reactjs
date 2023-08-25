@@ -6,7 +6,7 @@ function App() {
   const [employees, setEmployees] = useState([]);
 
   useEffect(() => {
-    // Replace this with your actual authentication logic
+    
     const authenticateUser = async () => {
       try {
         const authResponse = await axios.post('https://localhost:7277/api/Auth/auth', { "id":123, "password":"a"});
@@ -29,9 +29,8 @@ function App() {
   const fetchEmployees = async () => {
     try {
       const headers = {
-        'Authorization': `Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2OTI4MDA4MzgsIm5iZiI6MTY5MjgwMDgzOCwiZXhwIjoxNjkyODAwODk4LCJpc3MiOiJJc3N1ZXIiLCJhdWQiOiJBdWRpZW5jZSJ9.zllF0sks2hwR_H1uZ0EOGG4sUcJx6cW6a9eSHZVvgQ4UdSATDNDlX_fh3wyPULVnEhiwJH4lQHgBf99hOyYEng`
-        };
-        console.log('Headers:', headers);
+        'Authorization': `Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2OTI4OTM1ODAsIm5iZiI6MTY5Mjg5MzU4MCwiZXhwIjoxNjk1NDg1NTgwLCJpc3MiOiJJc3N1ZXIiLCJhdWQiOiJBdWRpZW5jZSJ9.NCsqWnSsxOfVT5gHxN59mRa3IpXZSfS8QcSp2dD0dH58lsMPEr8Fxpol1v8jh70SvwbzRmd9S70X3_S_bgBDLA` // Use the stored token here
+      };
       
       const employeesResponse = await axios.get('https://localhost:7277/api/Employee/all', { headers });
       console.log('Employees Response:', employeesResponse);
@@ -42,17 +41,24 @@ function App() {
     }
   };
 
-  return (
-    <div>
-      <h1>Employee List</h1>
-      <ul>
-        {console.log('Employees:', employees)} {/* Add this line */}
-        {employees.map(employee => (
-          <li key={employee.id}>{employee.name}</li>
-        ))}
-      </ul>
-    </div>
-  );
+  console.log('Employees:', employees); 
+
+return (
+  <div>
+    <h1>Employee List</h1>
+    {employees.length > 0 ? (
+  <ul>
+  {employees.map((employee, index) => (
+  <li key={index}>{employee.empName}</li>
+))}
+
+  </ul>
+) : (
+  <p>No employees to display</p>
+)}
+,</div>
+);
+
 }
 
 export default App;
