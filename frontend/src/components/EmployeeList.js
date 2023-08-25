@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import SearchComponent from './SearchData';
 
-function App() {
-  const [token, setToken] = useState(null);
-  const [employees, setEmployees] = useState([]);
+
+  function EmployeeList() {
+    const [token, setToken] = useState(null);
+    const [employees, setEmployees] = useState([]);
+    const [filteredData, setFilteredData] = useState([]);
 
   useEffect(() => {
     
@@ -45,20 +48,14 @@ function App() {
 
 return (
   <div>
-    <h1>Employee List</h1>
-    {employees.length > 0 ? (
-  <ul>
-  {employees.map((employee, index) => (
-  <li key={index}>{employee.empName}</li>
-))}
+      <h1>Employee List</h1>
+      <SearchComponent employees={employees} setFilteredData={setFilteredData} />
 
-  </ul>
-) : (
-  <p>No employees to display</p>
-)}
-,</div>
-);
-
+      
+    </div>
+  );
 }
 
-export default App;
+
+
+export default EmployeeList;
