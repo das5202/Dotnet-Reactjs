@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import '../styles/Search.css';
 
 function EmployeeList() {
   const [token, setToken] = useState(null);
   const [employees, setEmployees] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [searchResultMessage, setSearchResultMessage] = useState('');
 
   useEffect(() => {
     const authenticateUser = async () => {
       try {
-        const authResponse = await axios.post('https://localhost:7277/api/Auth/auth', { "id":123, "password":"a"});
+        const authResponse = await axios.post('https://localhost:7277/api/Auth/auth', { "id": 123, "password": "a" });
         setToken(authResponse.data.accessToken);
         console.log("Authentication Response:", authResponse);
       } catch (error) {
@@ -29,9 +31,9 @@ function EmployeeList() {
   const fetchEmployees = async () => {
     try {
       const headers = {
-        'Authorization': `Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2OTI5NzU2ODYsIm5iZiI6MTY5Mjk3NTY4NiwiZXhwIjoxNjk1NTY3Njg2LCJpc3MiOiJJc3N1ZXIiLCJhdWQiOiJBdWRpZW5jZSJ9.D4yywoUgrHLZzUtsTsk4dEWoNOimQhVFtn5vusJrBE-izmt_y0jjd0ffne7PvZ1-ify9kWVuyOEMxmMa_EuOyw` // Use the stored token here
+        'Authorization': `Bearer ${token}`
       };
-      
+
       const employeesResponse = await axios.get('https://localhost:7277/api/Employee/all', { headers });
       console.log('Employees Response:', employeesResponse);
       setEmployees(employeesResponse.data);
@@ -41,30 +43,45 @@ function EmployeeList() {
     }
   };
 
-  const filteredEmployees = employees.filter(employee =>
-    employee.empName.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const handleSearch = () => {
+    const filteredEmployees = employees.filter(employee =>
+      employee.empName.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
+    if (filteredEmployees.length === 0) {
+      setSearchResultMessage('No search results found.');
+    } else {
+      setSearchResultMessage('');
+    }
+
+    setEmployees(filteredEmployees);
+  };
 
   return (
-    <div>
-      <h1>Employee List</h1>
-      <div>
-        <input
-          type="text"
-          placeholder="Search by employee name"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
+    <div className="employee-container">
+    <h1 className="heading">Employee List</h1>
+    <div className="search-input-container">
+      <input
+        type="text"
+        placeholder="Search by employee name"
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        className="search-input"
+      />
+      <button className="search-button" onClick={handleSearch}>Search</button>
       </div>
-      <ul>
-        {filteredEmployees.map((employee, index) => (
-          <li key={index}>
-            {employee.empId}<br />
-            {employee.empName}
-          </li>
-        ))}
-      </ul>
+    <div className="no-search" >
+    {searchResultMessage && <p>{searchResultMessage}</p>}
+   
     </div>
+    <ul>
+      {employees.map((employee, index) => (
+        <li key={index}>
+         <span className="employee-id"> </span><strong>Id:</strong> {employee.empId} <strong><br/>Name: </strong>{employee.empName}
+        </li>
+      ))}
+    </ul>
+  </div>
   );
 }
 
