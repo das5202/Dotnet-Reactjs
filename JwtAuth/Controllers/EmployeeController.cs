@@ -44,14 +44,13 @@ namespace JwtAut.Controllers
         [HttpPost("create")]
         public IActionResult CreateEmployee([FromBody] Employee newEmployee)
         {
-            // Temporarily disable identity insert
-            _dbContext.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Employees ON;");
+            
 
-            // Insert the new employee with the provided EmpId
+            
             _dbContext.Employees.Add(newEmployee);
             _dbContext.SaveChanges();
 
-            // Re-enable identity insert
+            
             _dbContext.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Employees OFF;");
 
             return Created("", newEmployee);

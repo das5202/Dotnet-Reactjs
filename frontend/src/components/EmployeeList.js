@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../styles/Search.css';
+import EmployeePost from './EmployeePost';
 
 function EmployeeList() {
-  const [token, setToken] = useState(null);
+  
   const [employees, setEmployees] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResultMessage, setSearchResultMessage] = useState('');
+  const [token, setToken] = useState(null); // Store the token in the App component
 
   useEffect(() => {
     const authenticateUser = async () => {
@@ -60,6 +62,8 @@ function EmployeeList() {
   return (
     <div className="employee-container">
     <h1 className="heading">Employee List</h1>
+    <h1>employee aadd</h1>
+    <EmployeePost token={token}/>
     <div className="search-input-container">
       <input
         type="text"
