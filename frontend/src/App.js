@@ -1,14 +1,13 @@
-import React , { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Header from './components/Header';
 import EmployeeList from './components/EmployeeList';
 import EmployeePost from './components/EmployeePost';
-import axios from 'axios';
-
-
-
-
+import Home from './components/Home';
 
 function App() {
-  const [token, setToken] = useState(null); // Store the token in the App component
+  const [token, setToken] = useState(null);
 
   useEffect(() => {
     const authenticateUser = async () => {
@@ -25,11 +24,17 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <EmployeeList token ={token}/> 
-      <EmployeePost token={token}/>{/* Pass the token as a prop */}
-       {/* Pass the token as a prop */}
-    </div>
+    <Router>
+      <div className="App">
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/EmployeeList" element={<EmployeeList token={token} />} />
+          <Route path="/EmployeePost" element={<EmployeePost token={token} />} />
+          {/* Add other routes as needed */}
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
