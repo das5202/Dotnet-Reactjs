@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import EmployeeList from './components/EmployeeList';
 import EmployeePost from './components/EmployeePost';
+import EmployeeUpdate from './components/EmployeePut';
+import EmployeeDelete from './components/EmployeeDelete';
 import Home from './components/Home';
 
 function App() {
@@ -31,6 +33,9 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/EmployeeList" element={<EmployeeList token={token} />} />
           <Route path="/EmployeePost" element={<EmployeePost token={token} />} />
+          <Route path="/EmployeeDelete" element={<EmployeeDelete token={token} />} />
+  <Route path="/EmployeeUpdate" element={<EmployeeUpdate token={token} />} />
+  
           {/* Add other routes as needed */}
         </Routes>
       </div>

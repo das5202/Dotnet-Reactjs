@@ -9,8 +9,8 @@ function Header() {
       <div className="nav-links">
         <Link to="/EmployeeList">Search Employees</Link>
         <Link to="/EmployeePost">Add Employee</Link>
-        <Link to="/delete">Delete Employee</Link>
-        <Link to="/update">Update Employee</Link>
+        <Link to="/EmployeeDelete">Delete Employee</Link>
+        <Link to="/EmployeeUpdate">Update Employee</Link>
       </div>
     </div>
   );

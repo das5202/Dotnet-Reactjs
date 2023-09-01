@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../styles/Search.css';
-import EmployeePost from './EmployeePost';
+
 
 function EmployeeList({token}) {
   
@@ -48,7 +48,7 @@ function EmployeeList({token}) {
   return (
     <div className="employee-container">
     <h1 className="heading">Employee List</h1>
-    <h1>employee aadd</h1>
+    
     
     <div className="search-input-container">
       <input
