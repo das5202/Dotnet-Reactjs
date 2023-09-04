@@ -2,7 +2,7 @@
 .employee-update-container {
   font-family: Arial, sans-serif;
   text-align: left;
-  padding: 20px;
+  padding: 215px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,15 +15,15 @@
 }
 
 .update-form {
-  width: 300px;
+  width: 100%; /* Adjust the width as needed */
+  max-width: 400px; /* Set a maximum width to prevent it from becoming too wide */
   margin: 0 auto;
 }
 
 .update-input {
-  width: 100%;
+  width: 180px; /* Match the width of the search button */
   height: 25px;
   padding: 5px;
-  margin-bottom: 10px;
   border-radius: 5px;
   border: 1px solid #6e6f6f;
 }

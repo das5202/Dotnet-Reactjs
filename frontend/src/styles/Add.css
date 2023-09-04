@@ -2,7 +2,7 @@
 .employee-post-container {
     font-family: Arial, sans-serif;
     text-align: left;
-    padding: 20px;
+    padding: 215px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -15,24 +15,24 @@
   }
   
   .post-form {
+    
     width: 300px;
     margin: 0 auto;
   }
   
   .add-input {
-    width: 100%;
-    height: 25px;
-    padding: 5px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    border: 1px solid #6e6f6f;
+    width: 180px; /* Match the width of the search button */
+  height: 25px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #6e6f6f;
   }
   
   .post-button {
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    background-color: #42b72a;
+    background-color: #0eac0e;
     color: #ffffff;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.3s;

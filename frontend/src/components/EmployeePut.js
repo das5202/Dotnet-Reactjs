@@ -33,36 +33,37 @@ function EmployeeUpdate({ token }) {
     }
   };
 
-  return (
-    <div className="employee-update-container">
-      <h2>Update Employee</h2>
-      <div className="update-form">
-        <input
-          type="text"
-          placeholder="Employee ID"
-          value={employeeId}
-          onChange={(e) => setEmployeeId(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Employee Name"
-          name="empName"
-          value={updatedEmployee.empName}
-          onChange={(e) =>
-            setUpdatedEmployee((prevEmployee) => ({
-              ...prevEmployee,
-              [e.target.name]: e.target.value,
-            }))
-          }
-        />
-        {/* Other input fields for updating employee properties... */}
-        <br/>
-        <button className="update-button" onClick={handleUpdateEmployee}>
-          Update
-        </button>
-      </div>
+  // JavaScript (EmployeeUpdate.js)
+// ...
+
+return (
+  <div className="employee-update-container">
+    <h2 className="update-heading">Update Employee</h2>
+    <div className="update-form">
+     
+      <input
+        type="text"
+        className="update-input"
+        placeholder="Employee Name"
+        name="empName"
+        value={updatedEmployee.empName}
+        onChange={(e) =>
+          setUpdatedEmployee((prevEmployee) => ({
+            ...prevEmployee,
+            [e.target.name]: e.target.value,
+          }))
+        }
+      />
+      {/* Other input fields for updating employee properties... */}
+      
+      <button className="update-button" onClick={handleUpdateEmployee}>
+        Update
+      </button>
     </div>
-  );
+  </div>
+);
+// ...
+
 }
 
 export default EmployeeUpdate;

@@ -44,6 +44,7 @@ function EmployeePost({token}) {
       <div className="post-form">
         <input
           type="text"
+          className='add-input'
           placeholder="Employee Name"
           name="empName"
           value={newEmployee.empName}

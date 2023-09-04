@@ -24,22 +24,28 @@ function EmployeeDelete({ token }) {
     }
   };
 
-  return (
-    <div className="employee-delete-container">
-      <h2>Delete Employee</h2>
-      <div className="delete-form">
-        <input
-          type="text"
-          placeholder="Employee ID"
-          value={employeeId}
-          onChange={(e) => setEmployeeId(e.target.value)}
-        />
-        <button className="delete-button" onClick={handleDeleteEmployee}>
-          Delete
-        </button>
-      </div>
+  // JavaScript (EmployeeDelete.js)
+// ...
+
+return (
+  <div className="employee-delete-container">
+    <h2>Delete Employee</h2>
+    <div className="delete-form">
+      <input
+        type="text"
+        className="delete-input"
+        placeholder="Employee ID"
+        value={employeeId}
+        onChange={(e) => setEmployeeId(e.target.value)}
+      />
+      <button className="delete-button" onClick={handleDeleteEmployee}>
+        Delete
+      </button>
     </div>
-  );
+  </div>
+);
+// ...
+
 }
 
 export default EmployeeDelete;

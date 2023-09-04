@@ -35,14 +35,14 @@ ul li:hover {
 .employee-container {
   font-family: Arial, sans-serif;
   text-align: left;
-  padding: 187px;
+  padding: 200px;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: #dbe5e8;
 }
 .no-search{
-  font: ;
+  font: italic;
 }
 .employee-id {
   font-weight: bold;
