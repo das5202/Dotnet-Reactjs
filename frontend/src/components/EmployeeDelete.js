@@ -14,18 +14,17 @@ function EmployeeDelete({ token }) {
         },
       });
 
-      // Optionally, you can also refresh the employee list after deleting an employee
+      
       // fetchEmployees();
       
-      // Clear the input field after successful deletion
+      
       setEmployeeId('');
     } catch (error) {
       console.error('Error deleting employee:', error);
     }
   };
 
-  // JavaScript (EmployeeDelete.js)
-// ...
+ 
 
 return (
   <div className="employee-delete-container">
@@ -44,7 +43,7 @@ return (
     </div>
   </div>
 );
-// ...
+
 
 }
 

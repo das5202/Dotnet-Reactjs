@@ -1,8 +1,8 @@
 /* Update Page Styles */
 .employee-update-container {
   font-family: Arial, sans-serif;
-  text-align: left;
-  padding: 215px;
+  text-align: center;
+  padding: 215px; /* Reduce padding to create more space between elements */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -21,8 +21,9 @@
 }
 
 .update-input {
-  width: 180px; /* Match the width of the search button */
+  width: 100%; /* Make the input fields span the full width of their container */
   height: 25px;
+  margin-bottom: 15px; /* Add margin at the bottom of each input field */
   padding: 5px;
   border-radius: 5px;
   border: 1px solid #6e6f6f;

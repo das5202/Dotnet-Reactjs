@@ -7,7 +7,7 @@ function EmployeeUpdate({ token }) {
   const [employeeId, setEmployeeId] = useState('');
   const [updatedEmployee, setUpdatedEmployee] = useState({
     empName: '',
-    // Other employee properties...
+    
   });
 
   const handleUpdateEmployee = async () => {
@@ -19,28 +19,34 @@ function EmployeeUpdate({ token }) {
         },
       });
 
-      // Optionally, you can also refresh the employee list after updating an employee
-      // fetchEmployees();
       
-      // Clear the input fields after successful update
+       //fetchEmployees();
+      
+      
       setEmployeeId('');
       setUpdatedEmployee({
         empName: '',
-        // Other employee properties...
+       
       });
     } catch (error) {
       console.error('Error updating employee:', error);
     }
   };
 
-  // JavaScript (EmployeeUpdate.js)
-// ...
+ 
 
 return (
   <div className="employee-update-container">
     <h2 className="update-heading">Update Employee</h2>
     <div className="update-form">
-     
+    <input
+          type="text"
+          className='update-input'
+          placeholder="Employee ID"
+          value={employeeId}
+          onChange={(e) => setEmployeeId(e.target.value)}
+        />
+        <br/>
       <input
         type="text"
         className="update-input"
@@ -53,8 +59,8 @@ return (
             [e.target.name]: e.target.value,
           }))
         }
-      />
-      {/* Other input fields for updating employee properties... */}
+      /><br/>
+      
       
       <button className="update-button" onClick={handleUpdateEmployee}>
         Update
@@ -62,7 +68,7 @@ return (
     </div>
   </div>
 );
-// ...
+
 
 }
 

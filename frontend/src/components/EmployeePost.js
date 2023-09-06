@@ -5,7 +5,7 @@ import '../styles/Add.css';
 function EmployeePost({token}) {
   const [newEmployee, setNewEmployee] = useState({
     empName: '',
-    // Other employee properties...
+    
   });
 
   const handleInputChange = (event) => {
@@ -25,13 +25,13 @@ function EmployeePost({token}) {
         },
       });
       
-      // Optionally, you can also refresh the employee list after creating a new employee
-      //fetchEmployees();
+     
+     // fetchEmployees();
       
-      // Clear the input fields after successful creation
+      
       setNewEmployee({
         empName: '',
-        // Other employee properties...
+       
       });
     } catch (error) {
       console.error('Error creating employee:', error);
@@ -50,7 +50,7 @@ function EmployeePost({token}) {
           value={newEmployee.empName}
           onChange={handleInputChange}
         />
-        {/* Other input fields for employee properties... */}
+       
         <button className="post-button" onClick={handleCreateEmployee}>
           Create
         </button>

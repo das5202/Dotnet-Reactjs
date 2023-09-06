@@ -1,7 +1,7 @@
 /* Add Page Styles */
 .employee-post-container {
     font-family: Arial, sans-serif;
-    text-align: left;
+    text-align: center;
     padding: 215px;
     display: flex;
     flex-direction: column;
@@ -32,13 +32,13 @@
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    background-color: #0eac0e;
+    background-color: #0debaf;
     color: #ffffff;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.3s;
   }
   
   .post-button:hover {
-    background-color: #359c22;
+    background-color: #08c599;
   }
   

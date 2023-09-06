@@ -1,0 +1,14 @@
+.Home {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 215px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #dbe5e8;/* Styles for the entire 'Home' component if needed */
+  }
+  
+  .content-container {
+    /* Apply the background color to this element */
+  }
+  
