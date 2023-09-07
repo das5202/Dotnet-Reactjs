@@ -1,44 +1,46 @@
 /* Add Page Styles */
 .employee-post-container {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    padding: 215px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #dbe5e8;
-  }
-  
-  .add-heading {
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-  }
-  
-  .post-form {
-    
-    width: 300px;
-    margin: 0 auto;
-  }
-  
-  .add-input {
-    width: 180px; /* Match the width of the search button */
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: left; /* Center horizontally */
+  align-items: center; 
+  text-align: center;/* Center vertically */
+   /* Ensure the container takes the full viewport height */
+  background-color: #dbe5e8;
+  padding-left:30px;
+  padding-top: 59px;
+  padding-bottom: 199px;
+}
+
+.add-heading {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.post-form {
+  width: 300px;
+  text-align: center; /* Align form contents to the left */
+}
+
+.add-input {
+  width: 100%;
   height: 25px;
   padding: 5px;
+  margin-bottom: 10px;
   border-radius: 5px;
   border: 1px solid #6e6f6f;
-  }
-  
-  .post-button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    background-color: #0debaf;
-    color: #ffffff;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s;
-  }
-  
-  .post-button:hover {
-    background-color: #08c599;
-  }
-  
+}
+
+.post-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #0debaf;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.post-button:hover {
+  background-color: #08c599;
+}
