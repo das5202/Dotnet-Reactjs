@@ -85,11 +85,11 @@ namespace JwtAut.Controllers
             return Created("", response);
         }
 
-        [HttpPut("update/{id}")]
-        public IActionResult UpdateEmployee(int id, [FromBody] Employee updatedEmployee)
+        [HttpPut("update/{employeeId}")]
+        public IActionResult UpdateEmployee(int employeeId, [FromBody] Employee updatedEmployee)
         {
             // Find the employee by ID
-            var employee = _dbContext.Employees.Include(e => e.Department).FirstOrDefault(e => e.EmpId == id);
+            var employee = _dbContext.Employees.FirstOrDefault(e => e.EmpId == employeeId);
 
             if (employee != null)
             {
@@ -97,36 +97,6 @@ namespace JwtAut.Controllers
                 employee.EmpName = updatedEmployee.EmpName;
                 employee.EmployeeAddress = updatedEmployee.EmployeeAddress;
                 employee.EmployeeSalary = updatedEmployee.EmployeeSalary;
-
-                if (updatedEmployee.Department != null)
-                {
-                    // Check if the department exists by name
-                    var existingDepartment = _dbContext.Departments.FirstOrDefault(d => d.DepartmentName == updatedEmployee.Department.DepartmentName);
-
-                    if (existingDepartment != null)
-                    {
-                        // Use the existing department ID for the employee
-                        employee.DepartmentId = existingDepartment.DepartmentId;
-                    }
-                    else
-                    {
-                        // Department doesn't exist, create a new department
-                        var newDepartment = new Department
-                        {
-                            DepartmentName = updatedEmployee.Department.DepartmentName
-                        };
-                        _dbContext.Departments.Add(newDepartment);
-
-                        // Use the new department ID for the employee
-                        employee.DepartmentId = newDepartment.DepartmentId;
-                    }
-                }
-                else
-                {
-                    // Handle the case when no department is provided in the request (optional)
-                    // You can choose to keep the existing department or set it to null based on your requirements.
-                    // For now, let's keep the existing department.
-                }
 
                 // Save changes to the database
                 _dbContext.SaveChanges();
@@ -140,6 +110,7 @@ namespace JwtAut.Controllers
                 return NotFound();
             }
         }
+
 
 
 

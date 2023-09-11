@@ -34,8 +34,12 @@ function App() {
           <Route path="/EmployeeList" element={<EmployeeList token={token} />} />
           <Route path="/EmployeePost" element={<EmployeePost token={token} />} />
           <Route path="/EmployeeDelete" element={<EmployeeDelete token={token} />} />
-  <Route path="/EmployeeUpdate" element={<EmployeeUpdate token={token} />} />
+           <Route path="/EmployeeUpdate/:employeeId" element={<EmployeeUpdate token={token} /> }/>
+
+          {/*<Route path="/EmployeeUpdate/:empId" element={<EmployeeUpdate token={token} />} />*/}
+  {/*<Route path="/EmployeeUpdate" element={<EmployeeUpdate token={token} />} />*/}
   
+  {/*<Link to="/EmployeeUpdate/${employee.empId}">Update Employee</Link>*/}
           {/* Add other routes as needed */}
         </Routes>
       </div>

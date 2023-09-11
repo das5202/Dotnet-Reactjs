@@ -12,6 +12,9 @@ function EmployeePost({ token }) {
     employeeSalary: '',
   });
 
+  const [errors, setErrors] = useState({});
+  const [successMessage, setSuccessMessage] = useState('');
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     if (name.startsWith('department.')) {
@@ -30,35 +33,54 @@ function EmployeePost({ token }) {
     }
   };
 
-  const handleCreateEmployee = async () => {
-    try {
-      await axios.post('https://localhost:7277/api/Employee/create', newEmployee, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-      });
+  const validateForm = () => {
+    const errors = {};
+    if (!newEmployee.empName) {
+      errors.empName = 'Employee Name is required.';
+    }
+    if (!newEmployee.department.departmentName) {
+      errors.departmentName = 'Department Name is required.';
+    }
+    if (!newEmployee.employeeAddress) {
+      errors.employeeAddress = 'Employee Address is required.';
+    }
+    if (!newEmployee.employeeSalary) {
+      errors.employeeSalary = 'Employee Salary is required.';
+    }
+    setErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
 
-      setNewEmployee({
-        empName: '',
-        department: {
-          departmentName: '',
-        },
-        employeeAddress: '',
-        employeeSalary: '',
-      });
-    } catch (error) {
-      console.error('Error creating employee:', error);
+  const handleCreateEmployee = async () => {
+    if (validateForm()) {
+      try {
+        await axios.post('https://localhost:7277/api/Employee/create', newEmployee, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        });
+
+        setSuccessMessage('Employee created successfully');
+        setNewEmployee({
+          empName: '',
+          department: {
+            departmentName: '',
+          },
+          employeeAddress: '',
+          employeeSalary: '',
+        });
+      } catch (error) {
+        console.error('Error creating employee:', error);
+      }
     }
   };
 
   return (
     <div className="employee-post-container">
-      
       <div className="form-container">
-      
         <div className="post-form">
-        <h2>Create New Employee</h2>
+          <h2>Create New Employee</h2>
           <input
             type="text"
             className="add-input"
@@ -67,6 +89,7 @@ function EmployeePost({ token }) {
             value={newEmployee.empName}
             onChange={handleInputChange}
           />
+          {errors.empName && <div className="error">{errors.empName}</div>}
           <br />
           <input
             type="text"
@@ -76,6 +99,7 @@ function EmployeePost({ token }) {
             value={newEmployee.department.departmentName}
             onChange={handleInputChange}
           />
+          {errors.departmentName && <div className="error">{errors.departmentName}</div>}
           <br />
           <input
             type="text"
@@ -85,6 +109,7 @@ function EmployeePost({ token }) {
             value={newEmployee.employeeAddress}
             onChange={handleInputChange}
           />
+          {errors.employeeAddress && <div className="error">{errors.employeeAddress}</div>}
           <br />
           <input
             type="text"
@@ -94,10 +119,12 @@ function EmployeePost({ token }) {
             value={newEmployee.employeeSalary}
             onChange={handleInputChange}
           />
+          {errors.employeeSalary && <div className="error">{errors.employeeSalary}</div>}
           <br />
           <button className="post-button" onClick={handleCreateEmployee}>
             Create
           </button>
+          {successMessage && <div className="success">{successMessage}</div>}
         </div>
       </div>
     </div>

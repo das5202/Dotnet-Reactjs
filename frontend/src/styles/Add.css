@@ -19,7 +19,7 @@
 
 .post-form {
   width: 300px;
-  text-align: center; /* Align form contents to the left */
+  text-align: left; /* Align form contents to the left */
 }
 
 .add-input {
@@ -38,9 +38,21 @@
   background-color: #0debaf;
   color: #ffffff;
   cursor: pointer;
+  align:Right;
   transition: background-color 0.3s, transform 0.3s;
 }
 
 .post-button:hover {
   background-color: #08c599;
+}
+/* Add.css */
+
+.error {
+  color: red;
+  margin-top: 5px; /* Add some spacing between the input and error message */
+}
+
+.success {
+  color: green;
+  margin-top: 5px; /* Add some spacing between the input and success message */
 }

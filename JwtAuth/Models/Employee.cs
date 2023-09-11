@@ -10,7 +10,7 @@ namespace JwtAuth.Models
                public string? EmployeeAddress { get; set; }
                 public decimal EmployeeSalary { get; set; }
         public int DepartmentId { get; set; }
-            public Department Department { get; set; }
+            public Department  Department { get; set; }
         
 
     }

@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../styles/Search.css';
+import { Link } from 'react-router-dom';
 
-
-function EmployeeList({token}) {
-  
+function EmployeeList({ token }) {
   const [employees, setEmployees] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResultMessage, setSearchResultMessage] = useState('');
-  
 
   useEffect(() => {
     if (token) {
@@ -45,33 +43,77 @@ function EmployeeList({token}) {
     setEmployees(filteredEmployees);
   };
 
+  const handleEdit = (id) => {
+    
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      const headers = {
+        'Authorization': `Bearer ${token}`
+      };
+
+      const deleteResponse = await axios.delete(`https://localhost:7277/api/Employee/delete/${id}`, { headers });
+      console.log('Delete Response:', deleteResponse);
+
+      // Remove the deleted employee from the list
+      setEmployees(prevEmployees => prevEmployees.filter(employee => employee.empId !== id));
+    } catch (error) {
+      console.error('Error deleting employee:', error);
+      console.log('Error Response:', error.response);
+    }
+  };
+
   return (
     <div className="employee-container">
-    <h1 className="heading">Employee List</h1>
-    
-    
-    <div className="search-input-container">
-      <input
-        type="text"
-        placeholder="Search by employee name"
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-        className="search-input"
-      />
-      <button className="search-button" onClick={handleSearch}>Search</button>
+      <h1 className="heading">Employee Search</h1>
+      <div className="search-input-container">
+        <input
+          type="text"
+          placeholder="Search by employee name"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="search-input"
+        />
+        <button className="search-button" onClick={handleSearch}>Search</button>
       </div>
-    <div className="no-search" >
-    {searchResultMessage && <p>{searchResultMessage}</p>}
-   
+      <div className="no-search">
+        {searchResultMessage && <p>{searchResultMessage}</p>}
+      </div>
+      <table className="employee-table">
+        <thead>
+          <tr>
+            <th>Employee Name</th>
+            <th>Department Name</th>
+            <th>Employee Salary</th>
+            <th>Employee Address</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {employees.map((employee) => (
+            <tr key={employee.empId}>
+              <td>{employee.empName}</td>
+              <td>{employee.department.departmentName}</td>
+              <td>{employee.employeeSalary}</td>
+              <td>{employee.employeeAddress}</td>
+              <td>
+              <Link to={`/EmployeeUpdate/${employee.empId}`}> {/*'/EmployeeUpdate'>*/}
+            <button className='action-button'>
+              <i className='fas fa-edit'></i>
+            </button>
+            
+          </Link>
+              
+          
+                <button onClick={() => handleDelete(employee.empId)} className='action-button'>
+              <i className='fas fa-trash'></i> </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
-    <ul>
-      {employees.map((employee, index) => (
-        <li key={index}>
-         <span className="employee-id"> </span><strong>Id:</strong> {employee.empId} <strong><br/>Name: </strong>{employee.empName}
-        </li>
-      ))}
-    </ul>
-  </div>
   );
 }
 
