@@ -7,6 +7,7 @@ import EmployeePost from './components/EmployeePost';
 import EmployeeUpdate from './components/EmployeePut';
 import EmployeeDelete from './components/EmployeeDelete';
 import Home from './components/Home';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 function App() {
   const [token, setToken] = useState(null);
@@ -30,7 +31,7 @@ function App() {
       <div className="App">
         <Header />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<EmployeeList token={token} />} />
           <Route path="/EmployeeList" element={<EmployeeList token={token} />} />
           <Route path="/EmployeePost" element={<EmployeePost token={token} />} />
           <Route path="/EmployeeDelete" element={<EmployeeDelete token={token} />} />

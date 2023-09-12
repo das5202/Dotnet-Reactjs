@@ -1,4 +1,4 @@
-import React from 'react';
+{/*import React from 'react';
 import { Link } from 'react-router-dom'; // Import Link for navigation
 import '../styles/Home.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
@@ -36,4 +36,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Home;*/}

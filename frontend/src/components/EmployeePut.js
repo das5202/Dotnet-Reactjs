@@ -77,8 +77,9 @@ function EmployeeUpdate({ token }) {
 
   return (
     <div className="employee-post-container">
-      <h1 className="add-heading">Update Employee</h1>
+     
       <div className="post-form">
+      <h1 className="add-heading ">Update Employee</h1>
         <div className="form-group">
           <label htmlFor="empName">Employee Name</label>
           <input

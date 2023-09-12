@@ -1,5 +1,7 @@
 /* EmployeeUpdate.css */
 
+
+
 .employee-update-container {
   margin: 20px;
   padding: 20px;
@@ -11,7 +13,8 @@
 .add-heading {
   font-size: 1.5rem;
   margin-bottom: 20px;
-  text-align: center; /* Center the heading */
+  text-align: left; 
+  justify-content :center;/* Center the heading */
 }
 
 

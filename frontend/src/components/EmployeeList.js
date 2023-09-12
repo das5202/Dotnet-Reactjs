@@ -44,23 +44,26 @@ function EmployeeList({ token }) {
   };
 
   const handleEdit = (id) => {
-    
+    // Handle edit logic
   };
 
   const handleDelete = async (id) => {
-    try {
-      const headers = {
-        'Authorization': `Bearer ${token}`
-      };
+    const confirmDelete = window.confirm('Are you sure you want to delete this employee?');
 
-      const deleteResponse = await axios.delete(`https://localhost:7277/api/Employee/delete/${id}`, { headers });
-      console.log('Delete Response:', deleteResponse);
+    if (confirmDelete) {
+      try {
+        const headers = {
+          'Authorization': `Bearer ${token}`
+        };
 
-      // Remove the deleted employee from the list
-      setEmployees(prevEmployees => prevEmployees.filter(employee => employee.empId !== id));
-    } catch (error) {
-      console.error('Error deleting employee:', error);
-      console.log('Error Response:', error.response);
+        const deleteResponse = await axios.delete(`https://localhost:7277/api/Employee/delete/${id}`, { headers });
+        console.log('Delete Response:', deleteResponse);
+
+        setEmployees(prevEmployees => prevEmployees.filter(employee => employee.empId !== id));
+      } catch (error) {
+        console.error('Error deleting employee:', error);
+        console.log('Error Response:', error.response);
+      }
     }
   };
 
@@ -80,39 +83,39 @@ function EmployeeList({ token }) {
       <div className="no-search">
         {searchResultMessage && <p>{searchResultMessage}</p>}
       </div>
-      <table className="employee-table">
-        <thead>
-          <tr>
-            <th>Employee Name</th>
-            <th>Department Name</th>
-            <th>Employee Salary</th>
-            <th>Employee Address</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {employees.map((employee) => (
-            <tr key={employee.empId}>
-              <td>{employee.empName}</td>
-              <td>{employee.department.departmentName}</td>
-              <td>{employee.employeeSalary}</td>
-              <td>{employee.employeeAddress}</td>
-              <td>
-              <Link to={`/EmployeeUpdate/${employee.empId}`}> {/*'/EmployeeUpdate'>*/}
-            <button className='action-button'>
-              <i className='fas fa-edit'></i>
-            </button>
-            
-          </Link>
-              
-          
-                <button onClick={() => handleDelete(employee.empId)} className='action-button'>
-              <i className='fas fa-trash'></i> </button>
-              </td>
+      {employees.length > 0 && (
+        <table className="employee-table">
+          <thead>
+            <tr>
+              <th>Employee Name</th>
+              <th>Department Name</th>
+              <th>Employee Salary</th>
+              <th>Employee Address</th>
+              <th>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {employees.map((employee) => (
+              <tr key={employee.empId}>
+                <td>{employee.empName}</td>
+                <td>{employee.department.departmentName}</td>
+                <td>{employee.employeeSalary}</td>
+                <td>{employee.employeeAddress}</td>
+                <td>
+                  <Link to={`/EmployeeUpdate/${employee.empId}`}>
+                    <button className='edit-button'>
+                      <i className='fas fa-edit'></i>
+                    </button>
+                  </Link>
+                  <button onClick={() => handleDelete(employee.empId)} className='action-button delete-button'>
+                    <i className='fas fa-trash'></i>
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
     </div>
   );
 }

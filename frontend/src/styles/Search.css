@@ -1,24 +1,100 @@
+/* EmployeeList.css */
+
 .employee-container {
-  margin: 20px; /* Add margins to the container */
+  margin: -4px;
+  background-color: #dbe5e8;
+  padding: 143px;
+  border-radius: 5px;
+  bottom: 50px;
+  top: 10px;
+  padding-top: 42px;
+  padding-bottom: 300px;
+}
+
+.heading {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.search-input-container {
+  display: flex;
+  align-items: baseline; /* Align items along the baseline */
+  margin-bottom: 10px;
+}
+
+.search-input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.search-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 10px;
+  transition: background-color 0.3s;
+  width: 100px; /* Set a fixed width for the buttons */
+  height: 40px; /* Set a fixed height for the buttons */
+}
+
+.search-button:hover {
+  background-color: #0056b3;
+}
+
+.no-search {
+  margin-top: 10px;
+  font-weight: bold;
+  color: #ff0000;
 }
 
 .employee-table {
-  width: 100%; /* Make the table take up 100% of the container width */
-  border-collapse: collapse; /* Merge table borders */
-  margin-top: 20px; /* Add margin to the top of the table */
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
 }
 
 .employee-table th,
 .employee-table td {
-  border: 1px solid #ddd; /* Add borders to table cells */
-  padding: 8px; /* Add padding to table cells for spacing */
-  text-align: left; /* Align text to the left in cells */
+  border: 1px solid #3b3a3a;
+  padding: 8px;
+  text-align: left;
 }
 
 .employee-table th {
-  background-color: #f2f2f2; /* Add a background color to table headers */
+  background-color: #f2f2f2;
 }
 
 .employee-table button {
-  margin-right: 5px; /* Add margin to buttons for spacing */
+  margin-right: 5px;
+}
+
+/* EmployeeList.css */
+
+/* Styles for the edit button */
+.edit-button {
+  background-color: #28a745;
+  color: #fff;
+  width: 100px; 
+  height: 40px; 
+}
+
+.edit-button:hover {
+  background-color: #218838;
+}
+
+.delete-button {
+  background-color: #dc3545;
+  color: #fff;
+  width: 100px;
+  height: 40px;
+  margin-right: 5px; /* Add margin to the delete button */
+}
+
+.delete-button:hover {
+  background-color: #c82333;
 }
