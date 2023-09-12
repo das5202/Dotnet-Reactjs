@@ -81,6 +81,7 @@ function EmployeePost({ token }) {
       <div className="form-container">
         <div className="post-form">
           <h2>Create New Employee</h2>
+          <label htmlFor="empName">Employee Name</label>
           <input
             type="text"
             className="add-input"
@@ -91,6 +92,7 @@ function EmployeePost({ token }) {
           />
           {errors.empName && <div className="error">{errors.empName}</div>}
           <br />
+          <label htmlFor="departmnetName">Department Name</label>
           <input
             type="text"
             className="add-input"
@@ -101,6 +103,7 @@ function EmployeePost({ token }) {
           />
           {errors.departmentName && <div className="error">{errors.departmentName}</div>}
           <br />
+          <label htmlFor="empAddress">Employee Address</label>
           <input
             type="text"
             className="add-input"
@@ -111,6 +114,7 @@ function EmployeePost({ token }) {
           />
           {errors.employeeAddress && <div className="error">{errors.employeeAddress}</div>}
           <br />
+          <label htmlFor="empSalary">Employee Salary</label>
           <input
             type="text"
             className="add-input"

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate} from 'react-router-dom';
+import '../styles/Update.css';
 
 function EmployeeUpdate({ token }) {
   const { employeeId } = useParams();
@@ -75,9 +76,9 @@ function EmployeeUpdate({ token }) {
   };
 
   return (
-    <div className="employee-update-container">
-      <h1 className="heading">Update Employee</h1>
-      <div className="form-container">
+    <div className="employee-post-container">
+      <h1 className="add-heading">Update Employee</h1>
+      <div className="post-form">
         <div className="form-group">
           <label htmlFor="empName">Employee Name</label>
           <input
@@ -86,6 +87,7 @@ function EmployeeUpdate({ token }) {
             name="empName"
             value={employeeData.empName}
             onChange={handleInputChange}
+            className="add-input"
           />
         </div>
         <div className="form-group">
@@ -96,6 +98,7 @@ function EmployeeUpdate({ token }) {
             name="employeeAddress"
             value={employeeData.employeeAddress}
             onChange={handleInputChange}
+            className="add-input"
           />
         </div>
         <div className="form-group">
@@ -106,6 +109,7 @@ function EmployeeUpdate({ token }) {
             name="employeeSalary"
             value={employeeData.employeeSalary}
             onChange={handleInputChange}
+            className="add-input"
           />
         </div>
         <div className="form-group">
@@ -116,12 +120,12 @@ function EmployeeUpdate({ token }) {
             name="departmentName"
             value={employeeData.departmentName}
             onChange={handleInputChange}
+            className="add-input"
           />
         </div>
-        <button className="update-button" onClick={handleUpdate}>Update Employee</button>
+        <button className="post-button" onClick={handleUpdate}>Update Employee</button>
       </div>
     </div>
   );
 }
-
 export default EmployeeUpdate;

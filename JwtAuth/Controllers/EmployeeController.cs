@@ -89,7 +89,7 @@ namespace JwtAut.Controllers
         public IActionResult UpdateEmployee(int employeeId, [FromBody] Employee updatedEmployee)
         {
             // Find the employee by ID
-            var employee = _dbContext.Employees.FirstOrDefault(e => e.EmpId == employeeId);
+            var employee = _dbContext.Employees.Include(e => e.Department).FirstOrDefault(e => e.EmpId == employeeId);
 
             if (employee != null)
             {
@@ -97,6 +97,26 @@ namespace JwtAut.Controllers
                 employee.EmpName = updatedEmployee.EmpName;
                 employee.EmployeeAddress = updatedEmployee.EmployeeAddress;
                 employee.EmployeeSalary = updatedEmployee.EmployeeSalary;
+
+                // Update the department name if it has changed
+                if (employee.Department.DepartmentName != updatedEmployee.Department.DepartmentName)
+                {
+                    var newDepartment = _dbContext.Departments.FirstOrDefault(d => d.DepartmentName == updatedEmployee.Department.DepartmentName);
+
+                    if (newDepartment == null)
+                    {
+                        // If the new department doesn't exist, create a new one
+                        newDepartment = new Department
+                        {
+                            DepartmentName = updatedEmployee.Department.DepartmentName
+                        };
+
+                        _dbContext.Departments.Add(newDepartment);
+                    }
+
+                    // Associate the employee with the new department
+                    employee.Department = newDepartment;
+                }
 
                 // Save changes to the database
                 _dbContext.SaveChanges();
@@ -110,8 +130,6 @@ namespace JwtAut.Controllers
                 return NotFound();
             }
         }
-
-
 
 
 

@@ -1,44 +1,50 @@
-/* Update Page Styles */
+/* EmployeeUpdate.css */
+
 .employee-update-container {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  padding: 215px; /* Reduce padding to create more space between elements */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #dbe5e8;
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
-.update-heading {
+.add-heading {
   font-size: 1.5rem;
   margin-bottom: 20px;
+  text-align: center; /* Center the heading */
 }
 
-.update-form {
-  width: 100%; /* Adjust the width as needed */
-  max-width: 400px; /* Set a maximum width to prevent it from becoming too wide */
-  margin: 0 auto;
+
+.form-container {
+  display: flex;
+  flex-direction: column;
 }
 
-.update-input {
-  width: 100%; /* Make the input fields span the full width of their container */
-  height: 25px;
-  margin-bottom: 15px; /* Add margin at the bottom of each input field */
+.form-group {
+  margin-bottom: 10px;
+}
+
+label {
+  font-weight: bold;
+}
+
+input {
   padding: 5px;
-  border-radius: 5px;
-  border: 1px solid #6e6f6f;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  width: 100%;
+  margin-top: 5px;
 }
 
 .update-button {
-  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
   border: none;
-  border-radius: 5px;
-  background-color: #0debaf;
-  color: #ffffff;
+  border-radius: 3px;
+  padding: 10px 20px;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s;
 }
 
 .update-button:hover {
-  background-color: #08c599;
+  background-color: #0056b3;
 }
