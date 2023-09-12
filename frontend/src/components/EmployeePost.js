@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // Import useHistory from react-router-dom
 import '../styles/Add.css';
 
 function EmployeePost({ token }) {
+  const navigate = useNavigate(); // Initialize the history object
+
   const [newEmployee, setNewEmployee] = useState({
     empName: '',
     department: {
@@ -70,6 +73,9 @@ function EmployeePost({ token }) {
           employeeAddress: '',
           employeeSalary: '',
         });
+
+        // Redirect to the search page after successful creation
+        navigate('/EmployeeList'); // Replace '/search' with the actual route of your search page
       } catch (error) {
         console.error('Error creating employee:', error);
       }
