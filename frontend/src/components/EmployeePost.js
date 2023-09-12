@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; // Import useHistory from react-router-dom
+import { useNavigate } from 'react-router-dom';
 import '../styles/Add.css';
 
 function EmployeePost({ token }) {
-  const navigate = useNavigate(); // Initialize the history object
+  // Initialize the navigation hook
+  const navigate = useNavigate();
 
+  // State for the new employee data and form errors
   const [newEmployee, setNewEmployee] = useState({
     empName: '',
     department: {
@@ -15,9 +17,41 @@ function EmployeePost({ token }) {
     employeeSalary: '',
   });
 
-  const [errors, setErrors] = useState({});
-  const [successMessage, setSuccessMessage] = useState('');
+  const [errors, setErrors] = useState({}); // State for form errors
+  const [successMessage, setSuccessMessage] = useState(''); // State for success message
+  const [departments, setDepartments] = useState([]); // State for department data
 
+  // Define a local fetchEmployees function
+  const fetchEmployees = async () => {
+    try {
+      const response = await axios.get('https://localhost:7277/api/employee/departments', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+  
+      // Log the token here
+      console.log('Token (GET):', token);
+  
+      // Extract department names from employee data
+      const departmentNames = response.data.map((department) => department.departmentName);
+       
+      // Remove duplicate department names (if any)
+      //const uniqueDepartmentNames = [...new Set(departmentNames)];
+      //console.log('Departments:', uniqueDepartmentNames);
+      setDepartments(departmentNames);
+    } catch (error) {
+      console.error('Error fetching employees:', error);
+    }
+  };
+  
+
+  // Call fetchEmployees when the component mounts
+  useEffect(() => {
+    fetchEmployees();
+  }, []);
+
+  // Handle input changes for the form fields
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     if (name.startsWith('department.')) {
@@ -36,6 +70,7 @@ function EmployeePost({ token }) {
     }
   };
 
+  // Validate the form data
   const validateForm = () => {
     const errors = {};
     if (!newEmployee.empName) {
@@ -54,6 +89,7 @@ function EmployeePost({ token }) {
     return Object.keys(errors).length === 0;
   };
 
+  // Handle creating a new employee
   const handleCreateEmployee = async () => {
     if (validateForm()) {
       try {
@@ -63,6 +99,9 @@ function EmployeePost({ token }) {
             'Content-Type': 'application/json',
           },
         });
+
+        // Log the token here
+        console.log('Token (POST):', token);
 
         setSuccessMessage('Employee created successfully');
         setNewEmployee({
@@ -74,8 +113,8 @@ function EmployeePost({ token }) {
           employeeSalary: '',
         });
 
-        // Redirect to the search page after successful creation
-        navigate('/EmployeeList'); // Replace '/search' with the actual route of your search page
+        // Navigate to the EmployeeList page after successful creation
+        navigate('/EmployeeList');
       } catch (error) {
         console.error('Error creating employee:', error);
       }
@@ -98,18 +137,26 @@ function EmployeePost({ token }) {
           />
           {errors.empName && <div className="error">{errors.empName}</div>}
           <br />
-          <label htmlFor="departmnetName">Department Name</label>
-          <input
-            type="text"
-            className="add-input"
-            placeholder="Department Name"
-            name="department.departmentName"
-            value={newEmployee.department.departmentName}
-            onChange={handleInputChange}
-          />
+          <label htmlFor="department.departmentName">Department Name</label>
+        
+            <select
+                  className="department-select" // Add department-select class
+                  name="department-select"
+                  value={newEmployee.department.departmentName}
+                  onChange={handleInputChange}
+>
+
+             <option value="">Select Department</option>
+                 {departments.map((department, index) => (
+                   <option key={index} value={department}>
+                    {department}
+                    </option>
+                         ))}
+                      </select>
+
           {errors.departmentName && <div className="error">{errors.departmentName}</div>}
           <br />
-          <label htmlFor="empAddress">Employee Address</label>
+          <label htmlFor="employeeAddress">Employee Address</label>
           <input
             type="text"
             className="add-input"
@@ -120,7 +167,7 @@ function EmployeePost({ token }) {
           />
           {errors.employeeAddress && <div className="error">{errors.employeeAddress}</div>}
           <br />
-          <label htmlFor="empSalary">Employee Salary</label>
+          <label htmlFor="employeeSalary">Employee Salary</label>
           <input
             type="text"
             className="add-input"

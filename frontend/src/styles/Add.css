@@ -2,10 +2,10 @@
 .employee-post-container {
   font-family: Arial, sans-serif;
   display: flex;
-  justify-content: left; /* Center horizontally */
+  justify-content: left; 
   align-items: center; 
-  text-align: center;/* Center vertically */
-   /* Ensure the container takes the full viewport height */
+  text-align: center;
+   
   background-color: #dbe5e8;
   padding-left:30px;
   padding-top: 59px;
@@ -19,8 +19,9 @@
 
 .post-form {
   width: 300px;
-  text-align: left; /* Align form contents to the left */
+  text-align: left; 
 }
+
 
 .add-input {
   width: 100%;
@@ -30,6 +31,17 @@
   border-radius: 5px;
   border: 1px solid #6e6f6f;
 }
+.department-select {
+  width: 104%;
+  height: 35px;
+  
+  padding: 5px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #6e6f6f;
+  
+}
+
 
 .post-button {
   padding: 10px 20px;
@@ -49,10 +61,10 @@
 
 .error {
   color: red;
-  margin-top: 5px; /* Add some spacing between the input and error message */
+  margin-top: 5px; 
 }
 
 .success {
   color: green;
-  margin-top: 5px; /* Add some spacing between the input and success message */
+  margin-top: 5px;
 }

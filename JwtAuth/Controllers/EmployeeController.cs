@@ -148,5 +148,12 @@ namespace JwtAut.Controllers
                 return NotFound();
             }
         }
+        [HttpGet("departments")]
+        public IActionResult GetAllDepartments()
+        {
+            var departments = _dbContext.Departments.ToList();
+            return Ok(departments);
+        }
+
     }
 }

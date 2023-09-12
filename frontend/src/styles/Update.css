@@ -38,6 +38,14 @@ input {
   width: 100%;
   margin-top: 5px;
 }
+.department-select {
+  width: 104%;
+  height: 35px;
+  padding: 5px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #6e6f6f;
+}
 
 .update-button {
   background-color: #007bff;
